@@ -7,10 +7,16 @@
 
 using namespace std;
 
-using vc  = vector<char>;
-using vvc = vector<vc>;
+template<typename T>
+void print (const T& grid) {
+   cout << grid.size () << " " << grid[0].size () << endl;
+   for (const auto& row : grid) {
+      for (const auto& e : row) cout << e;
+      cout << endl;
+   }
+}
 
-void scatter_fill (vvc& grid, int count, char letter, int row) {
+void scatter_fill (vector<vector<char>>& grid, int count, char letter, int row) {
    int col = 1;
    while (count--) {
       grid[row][col] = letter;
@@ -19,39 +25,38 @@ void scatter_fill (vvc& grid, int count, char letter, int row) {
    }
 }
 
-template<typename T>
-void print (const T& grid) {
-   for (const auto& row : grid) {
-      for (const auto& e : row) cout << e;
-      cout << endl;
+auto initial_grid ()
+{
+   const char flowers[] = { 'A', 'B', 'C', 'D' };
+
+   vector<vector<char>> grid (48, vector<char> (50));
+
+   for (int i = 0; i < 4; ++i) {
+      for (int j = i * 12; j < (i + 1) * 12; ++j) {
+         fill (grid[j].begin (), grid[j].end (), flowers[i]);
+      }
    }
+
+   return grid;
 }
 
-int main () 
+void construct_flower_woods (int a, int b, int c, int d)
 {
-   int a, b, c, d; 
+   auto grid = initial_grid ();
+
+   scatter_fill (grid, b - 1, 'B', 1);
+   scatter_fill (grid, c - 1, 'C', 13);
+   scatter_fill (grid, d - 1, 'D', 25);
+   scatter_fill (grid, a - 1, 'A', 37);
+
+   print (grid);
+}
+
+int main ()
+{
+   int a, b, c, d;
    cin >> a >> b >> c >> d;
-   vvc s (48, vc (50));
-   
-   for (int i = 0; i < 48; i++) {
-      char A = [i]() {
-         if      (i < 12) return 'A';
-         else if (i < 24) return 'B';
-         else if (i < 36) return 'C';
-         else             return 'D';
-      } ();
-
-      fill (s[i].begin (), s[i].end (), A);
-   }
-   
-   scatter_fill (s, b - 1, 'B', 1);
-   scatter_fill (s, c - 1, 'C', 13);
-   scatter_fill (s, d - 1, 'D', 25);
-   scatter_fill (s, a - 1, 'A', 37);
-   
-   cout << 48 << " " << 50 << endl;
-
-   print (s);
+   construct_flower_woods (a, b, c, d);
 
    return 0;
 }

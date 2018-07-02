@@ -1,0 +1,5 @@
+# Basic .gitattributes for a python repo.
+
+# Source files
+# ============
+*.py 		text

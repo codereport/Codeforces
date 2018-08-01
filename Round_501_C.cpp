@@ -16,16 +16,10 @@ void compress_songs (const vi& a, const vi& b, int n, int m)
    vi diff (n);
    FORI (0, n) diff[i] = b[i] - a[i];
    auto total = accumulate (a.begin (), a.end (), 0LL);
-
-   if (total <= m) {
-      cout << 0 << endl;
-   }
-   else {
-      sort (diff.begin (), diff.end ());
-      int i = 0;
-      while (total > m && i < n) total += diff[i], ++i;
-      cout << (total <= m ? i : -1) << endl;
-   }
+   sort (diff.begin (), diff.end ());
+   int i = 0;
+   while (total > m && i < n) total += diff[i], ++i;
+   cout << (total <= m ? i : -1) << endl;
 }
 
 int main ()

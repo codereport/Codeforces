@@ -5,6 +5,7 @@ read line
 a=(${line//\s/})
 l=${a[0]}
 r=${a[1]}
+echo YES
 for i in $(seq $l 2 $r); do
     echo $i $(( $i + 1 ))
 done

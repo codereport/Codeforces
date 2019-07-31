@@ -18,7 +18,9 @@ bool superhero_transformed(string const& a, string const& b) {
       // would like to use C++17 transform_reduce here but not implemented yet
       inner_product(cbegin(a), cend(a), cbegin(b), true,
          std::logical_and{},
-         [&](auto a, auto b) { return is_vowel(a) == is_vowel(b); });
+         [&](auto a, auto b) { 
+            return is_vowel(a) == is_vowel(b); 
+         });
 }
 
 int main() {

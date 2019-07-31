@@ -16,8 +16,8 @@ bool is_vowel(char c) {
 bool superhero_transformed(string const& a, string const& b) {
    return a.size() == b.size() && 
       // would like to use C++17 transform_reduce here but not implemented yet
-      inner_product(begin(a), end(a), begin(b), true,
-         [ ](auto a, auto b) { return a && b; },
+      inner_product(cbegin(a), cend(a), cbegin(b), true,
+         std::logical_and{},
          [&](auto a, auto b) { return is_vowel(a) == is_vowel(b); });
 }
 
